@@ -21,7 +21,7 @@ namespace QueryIt
     int Commit();
   }
 
-  public class SqlRespository<T> : IRepository<T> where T: class
+  public class SqlRespository<T> : IRepository<T> where T: class, IEntity
   {
     DbContext _ctx;
     DbSet<T> _set;
@@ -32,6 +32,7 @@ namespace QueryIt
     }
     public void Add(T newEntity)
     {
+      if(newEntity.IsValid())
       _set.Add(newEntity);
     }
 
@@ -52,7 +53,7 @@ namespace QueryIt
 
     public IQueryable<T> FindAll()
     {
-      throw new NotImplementedException();
+      return _set;
     }
 
     public T FindById(int id)

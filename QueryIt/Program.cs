@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 
 namespace QueryIt
 {
@@ -25,12 +26,14 @@ namespace QueryIt
 
     private static void CountEmployees(IRepository<Employee> employeeRepository)
     {
-      throw new NotImplementedException();
+      Console.WriteLine(employeeRepository.FindAll().Count());
     }
 
     private static void AddEmployees(IRepository<Employee> employeeRepository)
     {
-      throw new NotImplementedException();
+      employeeRepository.Add(new Employee { Name = "Scott" });
+      employeeRepository.Add(new Employee { Name = "Chris" });
+      employeeRepository.Commit();
     }
   }
 }
